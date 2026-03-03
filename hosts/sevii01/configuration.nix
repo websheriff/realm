@@ -139,7 +139,9 @@
   networking.firewall.allowedUDPPorts = [
     # 8472 #k3s flannel
   ];
-  
+
+  services.xserver.videoDrivers = [ "i915" ];
+
   services.btrfs.autoScrub = {
     enable = true;
     interval = "weekly";
