@@ -1,5 +1,5 @@
 {
-	description = "AI Flake";
+	description = "Nixcfg Flake";
 	inputs = {
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
 		nixpkgs.url = "nixpkgs/nixos-25.11";
@@ -13,12 +13,11 @@
 		};
     flake-parts.url = "github:hercules-ci/flake-parts";
     agenix.url = "github:ryantm/agenix";
-    sops-nix.url = "github:Mic92/sops-nix";
     quadlet-nix.url = "github:SEIAROTg/quadlet-nix";
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
 	};
 
-	outputs = { self, quadlet-nix, agenix, sops-nix, flake-parts, nixpkgs, disko, home-manager, ... }@inputs:
+	outputs = { self, quadlet-nix, agenix, flake-parts, nixpkgs, disko, home-manager, ... }@inputs:
     let
       inherit (self) outputs;
       systems = [
@@ -35,7 +34,6 @@
 			    modules = [
 				    ./hosts/kanto
             agenix.nixosModules.default
-            sops-nix.nixosModules.sops
             quadlet-nix.nixosModules.quadlet
 			    ];
 		    };
@@ -54,7 +52,7 @@
           modules = [
             ./hosts/sevii01
             disko.nixosModules.disko
-            sops-nix.nixosModules.sops
+            agenix.nixosModules.default
           ];
         };
       };
