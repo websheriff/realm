@@ -20,7 +20,7 @@
 
   environment.persistence."/persist" = {
     directories = [
-      #"/etc"
+      "/etc"
       "/var/spool"
       "/srv"
     ];
