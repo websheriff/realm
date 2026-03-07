@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: {
+{ config, lib, pkgs, inputs, ... }: {
   
   imports =
     [];
@@ -33,7 +33,7 @@
   users.users.websheriff = {
       isNormalUser = true;
       extraGroups = [ "wheel" ];
-      initialHashedPassword = "$y$j9T$XJAqbwXPCK7MqJ4ORUqFX/$R9IeVyZOIJneIZDAmsWBdeOgQ2QkBlD1GdW.FUd6uz2";
+      initialHashedPassword = config.age.secrets.websheriffHash.path;
       packages = with pkgs; [];
     };
   users.groups.websheriff = {};
@@ -43,6 +43,7 @@
     #vim
     #wget
     git
+    inputs.agenix.packages."${system}".default
     ghostty
     k3s
     nfs-utils
@@ -107,7 +108,7 @@
           "vlan100"
         ];
         networkConfig.LinkLocalAddressing = "no";
-        linkConfig.RequiredForOnline = "no";
+        linkConfig.RequiredForOnline = "routable";
       };
       "30-vlan30" = {
         matchConfig.Name = "vlan30";
