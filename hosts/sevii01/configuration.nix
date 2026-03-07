@@ -1,4 +1,19 @@
-{ config, lib, pkgs, inputs, ... }: {
+{ config, lib, pkgs, inputs, ... }:
+let
+  custom-kubernetes-helm = with pkgs; wrapHelm kubernetes-helm {
+    plugins = with pkgs.kubernetes-helmPlugins; [
+      helm-diff
+      helm-secrets
+      helm-s3
+      helm-git
+    ];
+  };
+
+  custom-helmfile = pkgs.helmfile-wrapped.override {
+    inherit (custom-kubernetes-helm) pluginsDir;
+  };
+in
+{
   
   imports =
     [];
@@ -42,13 +57,15 @@
     helix
     nil
     nixfmt
-    #vim
-    #wget
+    yaml-language-server
+    helm-ls
     git
-    inputs.agenix.packages."${system}".default
+    inputs.agenix.packages."${stdenv.hostPlatform.system}".default
     ghostty
     k3s
     nfs-utils
+    custom-kubernetes-helm
+    custom-helmfile
   ];
   environment.variables.EDITOR = "hx";
 
