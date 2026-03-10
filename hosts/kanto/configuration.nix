@@ -96,6 +96,7 @@ in
 
   networking.firewall.allowedTCPPorts = [ 
     25565
+    3000
   ];
   networking.firewall.allowedUDPPorts = [
   ];
@@ -168,7 +169,7 @@ in
         HTTP_PORT = 3000;
       };
 
-      service.DISABLE_REGISTRATION = false;
+      service.DISABLE_REGISTRATION = true;
 
       actions = {
         ENABLED = true;

@@ -4,8 +4,8 @@ instance:
     version:
   sync:
     kind: GitRepository
-    url: ssh://
+    url: ssh://forgejo@git-bak.int.002042.xyz/websheriff/nixcfg.git
     ref: refs/heads/main
     patch: kubernetes/flux
     interval: 2m
-    pullSeecret:
+    pullSecret:
