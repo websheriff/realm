@@ -1,0 +1,11 @@
+---
+instance:
+  distribution:
+    version:
+  sync:
+    kind: GitRepository
+    url: ssh://
+    ref: refs/heads/main
+    patch: kubernetes/flux
+    interval: 2m
+    pullSeecret:

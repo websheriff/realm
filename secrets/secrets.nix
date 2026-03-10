@@ -4,4 +4,5 @@ let
 in {
   "newtMC.age".publicKeys = [ kanto ];
   "websheriffHash.age".publicKeys = [ kanto sevii01 ];
+  "cloudflareToken.age".publicKeys = [ sevii01 ];
 }

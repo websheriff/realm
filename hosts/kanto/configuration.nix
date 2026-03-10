@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }: {
+{ config, lib, pkgs, ... }:
+let
+  cfg = config.services.forgejo;
+  srv = cfg.settings.server;
+in
+{
   
   imports =
     [];
@@ -141,6 +146,54 @@
     enable = true;
     environmentFile = config.age.secrets.secret-newtMC.path;
   };
+
+  services.nginx = {
+    virtualHosts.${cfg.settings.server.DOMAIN} = {
+      forceSSL = true;
+      enableACME = true;
+      extraConfig = ''
+        client_max_body_size 512M;
+      '';
+      locations."/".proxyPass = "http://localhost:${toString srv.HTTP_PORT}";
+    };
+  };
+  services.forgejo = {
+    enable = true;
+    database.type = "postgres";
+    lfs.enable = true;
+    settings = {
+      server = {
+        DOMAIN = "git-bak.int.002042.xyz";
+        ROOT_URL = "https://${srv.DOMAIN}/";
+        HTTP_PORT = 3000;
+      };
+
+      service.DISABLE_REGISTRATION = false;
+
+      actions = {
+        ENABLED = true;
+        DEFAULT_ACTIONS_URL = "github";
+      };
+      mailer = {
+        ENABLED = false;
+      };
+    };
+  };
+  services = {
+    forgejo.settings.server.SSH_PORT = lib.head config.services.openssh.ports;
+  };
+  #services.gitea-actions-runner = {
+  #  package = pkgs.foregejo-runner;
+  #  instances.default = {
+  #    enable = true;
+  #    name = "";
+  #    url = "https://git-bak.int.002042.xyz";
+  #    tokenFile = config.age.secrets.secret-forgejoRunner.path;
+  #    labels = [
+  #      "native:host"
+  #    ];
+  #  };
+  #};
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   system.stateVersion = "25.11";
