@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 let
   cfg = config.services.forgejo;
   srv = cfg.settings.server;
@@ -30,6 +30,7 @@ in
     git
     ghostty
     fosrl-newt
+    inputs.agenix.packages."${stdenv.hostPlatform.system}".default
   ];
   environment.variables.EDITOR = "nvim";
 
@@ -77,16 +78,14 @@ in
           "vlan100"
         ];
         networkConfig.LinkLocalAddressing = "no";
-        linkConfig.RequiredForOnline = "no";
+        linkConfig.RequiredForOnline = "routable";
       };
       "30-vlan50" = {
         matchConfig.Name = "vlan50";
-        DHCP = "ipv4";
         linkConfig.RequiredForOnline = "no";
       };
       "30-vlan100" = {
         matchConfig.Name = "vlan100";
-        DHCP = "ipv4";
         linkConfig.RequiredForOnline = "no";
       };
     };
@@ -148,16 +147,6 @@ in
     environmentFile = config.age.secrets.secret-newtMC.path;
   };
 
-  services.nginx = {
-    virtualHosts.${cfg.settings.server.DOMAIN} = {
-      forceSSL = true;
-      enableACME = true;
-      extraConfig = ''
-        client_max_body_size 512M;
-      '';
-      locations."/".proxyPass = "http://localhost:${toString srv.HTTP_PORT}";
-    };
-  };
   services.forgejo = {
     enable = true;
     database.type = "postgres";
