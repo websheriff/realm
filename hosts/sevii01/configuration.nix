@@ -54,6 +54,8 @@ in
   users.groups.websheriff = {};
 
   environment.systemPackages = with pkgs; [
+    age
+    sops
     helix
     nil
     nixfmt
@@ -189,47 +191,38 @@ in
     ];
   };
 
-  environment.etc."k3s/helmfile.yaml" = {
-    mode = "0750";
-    text = ''
-      releases:
-        - name: cilium
-          namespace: kube-system
-          chart: oci://quay.io/cilium/charts/cilium
-          version: 1.19.1
-          values: ["${../../services/k3s/core/networking/cilium/operator/helm-values.yaml}"]
-          wait: true
-        - name: coredns
-          namespace: kube-system
-          chart: oci://ghcr.io/coredns/charts/coredns
-          version: 1.45.2
-          values: ["${../../services/k3s/core/networking/coredns/app/helm-values.yaml}"]
-          wait: true
-        - name: flux-operator
-          namespace: flux-system
-          chart: oci://ghcr.io/controlplaneio-fluxcd/charts/flux-operator
-          version: 0.43.0
-          wait: true
-        - name: flux-instance
-          namespace: flux-system
-          chart: oci://ghcr.io/controlplaneio-fluxcd/charts/flux-instance
-          version: 0.43.0
-          values: ["${../../services/k3s/gitops/flux-instance/app/helm-values.yaml}", "${../../services/k3s/config/settings/flux.yaml}"]
-          wait: true
-          needs:
-            - flux-system/flux-operator
-    '';
-  };
-  #Temporary Cloudflare token until figure out SOPS
-  #system.activationScripts.cloudflareK3sSecret = ''
-  #  ${pkgs.kubectl}/bin/kubectl --kubeconfig=/etc/rancher/k3s/k3s.yaml \
-  #    create secret generic cloudflare-api-token \
-  #    --namespace cert-manager \
-  #    --from-literal=api-token=$(cat ${config.age.secrets.secret-cloudflareToken.path}) \
-  #    --dry-run=client -o yaml \
-  #    | ${pkgs.kubectl}/bin/kubectl apply -f - || true
-  #  '';
-  
+#  environment.etc."k3s/helmfile.yaml" = {
+#    mode = "0750";
+#    text = ''
+#      releases:
+#        - name: cilium
+#          namespace: kube-system
+#          chart: oci://quay.io/cilium/charts/cilium
+#          version: 1.19.1
+#          values: ["${../../services/k3s/core/networking/cilium/operator/helm-values.yaml}"]
+#          wait: true
+#        - name: coredns
+#          namespace: kube-system
+#          chart: oci://ghcr.io/coredns/charts/coredns
+#          version: 1.45.2
+#          values: ["${../../services/k3s/core/networking/coredns/app/helm-values.yaml}"]
+#          wait: true
+#        - name: flux-operator
+#          namespace: flux-system
+#          chart: oci://ghcr.io/controlplaneio-fluxcd/charts/flux-operator
+#          version: 0.43.0
+#          wait: true
+#        - name: flux-instance
+#          namespace: flux-system
+#          chart: oci://ghcr.io/controlplaneio-fluxcd/charts/flux-instance
+#          version: 0.43.0
+#          values: ["${../../services/k3s/gitops/flux-instance/app/helm-values.yaml}", "${../../services/k3s/config/settings/flux.yaml}"]
+#          wait: true
+#          needs:
+#            - flux-system/flux-operator
+#    '';
+#  };
+
   services.openiscsi = {
     enable = true;
     name = "iqn.2024-11.xyz.002042:sevii01";
