@@ -153,7 +153,7 @@ in
     lfs.enable = true;
     settings = {
       server = {
-        DOMAIN = "git-bak.int.002042.xyz";
+        DOMAIN = "git.dev.002042.xyz";
         ROOT_URL = "https://${srv.DOMAIN}/";
         HTTP_PORT = 3000;
       };
