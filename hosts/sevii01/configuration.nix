@@ -198,14 +198,14 @@ in
         targetNamespace = "kube-system";
         repo = "oci://quay.io/cilium/charts/cilium";
         version = "1.19.1";
-        values = ../../services/k3s/core/networking/cilium/operator/helm-values.yaml;
+        values = ../common/optional/ervices/k3s/core/networking/cilium/operator/helm-values.yaml;
       };
       coredns = {
         name = "coredns";
         targetNamespace = "kube-system";
         repo = "oci://ghcr.io/coredns/charts/coredns";
         version = "1.45.2";
-        values = ../../services/k3s/core/networking/coredns/app/helm-values.yaml;
+        values = ../common/optional/services/k3s/core/networking/coredns/app/helm-values.yaml;
       };
       flux-operator = {
         name = "flux-operator";
@@ -218,9 +218,9 @@ in
         targetNamespace = "flux-system";
         repo = "oci://ghcr.io/controlplaneio-fluxcd/charts/flux-instance";
         version = "0.43.0";
-        values = [
-          ../../services/k3s/core/gitops/flux-instance/app/helm-values.yaml
-          ../../services/k3s/config/settings/flux.yaml
+        values = ../common/optional/k3s/core/gitops/flux-instance/app/helm-values.yaml;
+        extraDeploy = [
+          ../common/optional/services/k3s/config/settings/flux.yaml
         ];
       };
     };

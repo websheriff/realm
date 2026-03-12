@@ -2,8 +2,17 @@
 
 {
 	home.username = "websheriff";
-	home.homeDirectory = "/home/websheriff";
-	programs.git.enable = true;
+	home.homeDirectory = "/home/${config.home.username}";
+	programs.git = {
+		enable = true;
+		settings = {
+			user = {
+				name = "websheriff";
+				email = "websheriff@fastmail.com";
+			};
+			init.defaultBranch = "master";
+		};
+	};
 	home.stateVersion = "25.11";
 
 	home.file.".config/nvim".source = ../common/config/nvim;
