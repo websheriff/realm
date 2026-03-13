@@ -5,7 +5,7 @@
     ./nushell.nix
   ];
   
-  programs.caraspace = {
+  programs.carapace = {
     enable = true;
     enableBashIntegration = true;
     enableFishIntegration = true;

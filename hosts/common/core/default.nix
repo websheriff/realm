@@ -1,7 +1,6 @@
-{ config, pkgs, lib, ... }: {
+{ ... }: {
   imports = [
     ./sops.nix
-    ./fish.nix
   ];
 
   nix.gc = {
