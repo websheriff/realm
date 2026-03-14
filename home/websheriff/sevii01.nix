@@ -1,6 +1,5 @@
 {
   imports = [
-    ../core
     ../features/cli
     ./home.nix
   ];

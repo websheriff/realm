@@ -24,9 +24,12 @@
     agenix.url = "github:ryantm/agenix";
     quadlet-nix.url = "github:SEIAROTg/quadlet-nix";
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
-    niri.url = "github:sodiboo/niri-flake";
     dms = {
       url = "github:AvengeMedia/DankMaterialShell/stable";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    dms-plugin-registry = {
+      url = "github:AvengeMedia/dms-plugin-registry";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 	};
@@ -62,14 +65,14 @@
 			    ];
 		    };
 	    };
-      nixosConfigurations = {
-        charizard = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
-          modules = [
-            ./hosts/charizard
-          ];
-        };
-      };
+      #nixosConfigurations = {
+      #  charizard = nixpkgs.lib.nixosSystem {
+      #    specialArgs = { inherit inputs outputs; };
+      #    modules = [
+      #      ./hosts/charizard
+      #    ];
+      #  };
+      #};
       nixosConfigurations = {
         sevii01 = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
@@ -84,7 +87,7 @@
       };
 #      homeConfigurations = {
 #        "websheriff@charizard" = home-manager.lib.homeManagerConfiguration {
-#          pkgs = nixpkgs-unstable.legacyPackages."x86_64-linux";
+#          pkgs = nixpkgs.legacyPackages."x86_64-linux";
 #          extraSpecialArgs = { inherit inputs outputs; };
 #          modules = [
 #            ./home/websheriff/home.nix

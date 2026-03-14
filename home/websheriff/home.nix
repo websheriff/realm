@@ -1,14 +1,17 @@
-{ config, pkgs, ...  }:
+{ config, pkgs, ...  }: {
 
-{
-	home.username = "websheriff";
-	home.homeDirectory = "/home/${config.home.username}";
-	home.stateVersion = "25.11"; 	
-	home.packages = with pkgs; [
-		
+	imports = [
+		../core
 	];
 	
+	home.username = "websheriff";
+	home.homeDirectory = "/home/${config.home.username}";
+	home.stateVersion = "25.11";
+
 	programs.home-manager.enable = true;
+	 	
+	home.packages = with pkgs; [	
+	];
 	
 	programs.git = {
 		enable = true;
