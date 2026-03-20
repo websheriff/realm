@@ -35,3 +35,4 @@ Too many to list, but any will work and has no real bases other than "cause"
 | `sevii01`| K3s Server | Thinkcentre Tiny x920 |
 | `kanto` | General Server | HP Z440 |
 | `charizard` | Desktop | Gaming desktop (AMD 5800X, RX 9070XT) |
+| `sun` | OPNsense Firewall | Dell R210ii | 
