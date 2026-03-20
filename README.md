@@ -3,6 +3,10 @@
 
 ## Hosts
 
-1. Sevii01 - 03, a K3s cluster
-2. Kanto, general purpose server, LLM and game servers
-3. Charizard, gaming desktop
+Host names follow Pokemon naming convention. See "Hostnames" for structure.
+
+| Host | Hardware| Description |
+|------|---------|-------------|
+| `sevii01` | Lenovo Thinkcentre Tiny x920 | K3s cluser server |
+| `kanto` | HP Z440 | General Purpose. LLM and game servers |
+| `charizard` | AMD 5800x, RX 9070XT | Gaming desktop |
