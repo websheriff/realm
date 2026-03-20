@@ -3,9 +3,11 @@ keys:
     - &websheriff age13caapzvetyy0xpu2xazsjkqxhlem2ewegghkld634k4u20s5hy0sc7ueul
   - &hosts:
     - &sevii01 age1mh9krt55s6fl7qy7duz6e7ddwvurcqasqdc2tae0aapdaw99p99qzh7dww
+    - &kanto age1q80fddfmd29x67fnhw4sv9dfzdu5vk5k4phpjkftpjg6rcfzsqqszx52rv
 creation_rules:
   - path_regex: secrets.yaml$
     key_groups:
       - age:
           - *websheriff
           - *sevii01
+          - *kanto
