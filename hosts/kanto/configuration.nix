@@ -35,7 +35,7 @@ nixpkgs.config.allowUnfree = true;
     helix
     inputs.agenix.packages."${stdenv.hostPlatform.system}".default
   ];
-  environment.variables.EDITOR = "helix";
+  environment.variables.EDITOR = "hx";
 
   networking = {
     usePredictableInterfaceNames = true;
