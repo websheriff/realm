@@ -14,22 +14,25 @@ in
   networking.hostName = "kanto";
 
   time.timeZone = "America/Chicago";
-
-#  users.users.websheriff = {
-#      isNormalUser = true;
-#      extraGroups = [ "wheel" "minecraft" ];
-#      packages = with pkgs; [
-#        tree
-#	      neovim
-#      ];
-#    };
-
+#sops.secrets."users/websheriff/password".neededForUsers = true;
+  users.users.websheriff = {
+      isNormalUser = true;
+      extraGroups = [ "wheel" "minecraft" ];
+      packages = with pkgs; [
+        tree
+	      neovim
+      ];
+    };
+nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
+    age
+    sops
     vim
     wget
     git
     ghostty
     fosrl-newt
+    helix
     inputs.agenix.packages."${stdenv.hostPlatform.system}".default
   ];
   environment.variables.EDITOR = "nvim";

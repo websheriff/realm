@@ -1,6 +1,6 @@
 { config, ... }: {
   imports = [
-    ../common
+    #../common
     #../common/optional/services/llm.nix
     ./configuration.nix
     ./hardware-configuration.nix
