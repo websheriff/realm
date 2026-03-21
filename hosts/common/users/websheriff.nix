@@ -4,6 +4,7 @@ let
 in
 {
   users.mutableUsers = false;
+  sops.secrets."users/websheriff/password".neededForUsers = true;
   users.users.websheriff = {
     isNormalUser = true;
     extraGroups = ifExists [

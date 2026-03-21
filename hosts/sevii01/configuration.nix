@@ -45,8 +45,8 @@ in
 
   time.timeZone = "America/Chicago";
 
-  sops.secrets."users/websheriff/password".neededForUsers = true;
-  users.mutableUsers = false;
+  #sops.secrets."users/websheriff/password".neededForUsers = true;
+  #users.mutableUsers = false;
 
 #  users.users.websheriff = {
 #      isNormalUser = true;
