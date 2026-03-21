@@ -1,5 +1,6 @@
 {
   imports = [
+    ../core/sops.nix
     ../features/cli
     ./home.nix
   ];
