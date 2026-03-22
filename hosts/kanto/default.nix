@@ -14,7 +14,7 @@
     services = {
       caddy.enable = true;
       acme.enable = true;
-  #    forgejo.enable = true;
+      forgejo.enable = true;
     };
   };  
 }

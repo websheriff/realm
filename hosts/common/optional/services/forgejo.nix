@@ -1,29 +1,19 @@
 { config, lib, pkgs, ... }:
 with lib; let
   cfg = config.optional.services.forgejo;
-in
-let
   forgecfg = config.services.forgejo;
   srv = forgecfg.settings.server;
+  certloc = "/var/lib/acme/dev.002042.xyz";
+  git-devDomain = "git.dev.002042.xyz";
 in {
-  options.optional.services.caddy.enable = mkEnableOption "enable forgejo";
+  options.optional.services.forgejo.enable = mkEnableOption "enable forgejo";
   config = mkIf cfg.enable {
 
     services.caddy = {
-      virtualHosts."${config.sops.sercrets."forgejo/dev/domain".path}
-        services.caddy = {
-          virtualHosts."${config.sops.sercrets."forgejo/dev/domain".path}".extraConfig = ''
-          reverse_proxy http://localhost:3000
-
-         tls /var/lib/acme/${config.sops.secrets."admin/dev-domain".path}/cert.pem /var/lib/acme/${config.sops.secrets."admin/dev-domain"}.path/key.pem {
-            protocols tls1.3
-          }
-        '';
-        };"
-          .extraConfig = ''
+      virtualHosts."${git-devDomain}".extraConfig = ''
         reverse_proxy http://localhost:3000
 
-        tls /var/lib/acme/${config.sops.secrets."admin/dev-domain".path}/cert.pem /var/lib/acme/${config.sops.secrets."admin/dev-domain".path}/key.pem {
+        tls ${certloc}/cert.pem ${certloc}/key.pem {
           protocols tls1.3
         }
       '';
@@ -35,7 +25,7 @@ in {
       lfs.enable = true;
       settings = {
         server = {
-          DOMAIN = "${config.sops.secrets."forgejo/dev/domain".path}";
+          DOMAIN = "${git-devDomain}";
           ROOT_URL = "https://${srv.DOMAIN}/";
           HTTP_PORT = 3000;
         };
@@ -68,5 +58,5 @@ in {
           #"native:host"
         #];
       #};
-    #};
+    };
 }

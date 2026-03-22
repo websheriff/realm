@@ -1,8 +1,8 @@
 { config, lib, pkgs, inputs, ... }:
-let
-  cfg = config.services.forgejo;
-  srv = cfg.settings.server;
-in
+#let
+  #cfg = config.services.forgejo;
+  #srv = cfg.settings.server;
+#in
 {
   
   imports =
@@ -99,6 +99,8 @@ nixpkgs.config.allowUnfree = true;
   networking.firewall.allowedTCPPorts = [ 
     25565
     3000
+    80
+    443
   ];
   networking.firewall.allowedUDPPorts = [
   ];
@@ -151,31 +153,31 @@ nixpkgs.config.allowUnfree = true;
     environmentFile = config.age.secrets.secret-newtMC.path;
   };
 
-  services.forgejo = {
-    enable = true;
-    database.type = "postgres";
-    lfs.enable = true;
-    settings = {
-      server = {
-        DOMAIN = "git.dev.002042.xyz";
-        ROOT_URL = "https://${srv.DOMAIN}/";
-        HTTP_PORT = 3000;
-      };
+  #services.forgejo = {
+    #enable = true;
+    #database.type = "postgres";
+    #lfs.enable = true;
+    #settings = {
+      #server = {
+        #DOMAIN = "git.dev.002042.xyz";
+        #ROOT_URL = "https://${srv.DOMAIN}/";
+        #HTTP_PORT = 3000;
+      #};
 
-      service.DISABLE_REGISTRATION = true;
+      #service.DISABLE_REGISTRATION = true;
 
-      actions = {
-        ENABLED = true;
-        DEFAULT_ACTIONS_URL = "github";
-      };
-      mailer = {
-        ENABLED = false;
-      };
-    };
-  };
-  services = {
-    forgejo.settings.server.SSH_PORT = lib.head config.services.openssh.ports;
-  };
+      #actions = {
+        #ENABLED = true;
+        #DEFAULT_ACTIONS_URL = "github";
+      #};
+      #mailer = {
+        #ENABLED = false;
+      #};
+    #};
+  #};
+  #services = {
+    #forgejo.settings.server.SSH_PORT = lib.head config.services.openssh.ports;
+  #};
   #services.gitea-actions-runner = {
   #  package = pkgs.foregejo-runner;
   #  instances.default = {
