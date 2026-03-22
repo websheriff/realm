@@ -1,23 +1,27 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 with lib; let
-  cfg =
+  cfg = config.optional.services.acme;
+  email = config.sops.secrets."admin/email".path;
+  dev-domain = config.sops.secrets."admin/dev-domain".path;
 in {
-  security.acme = {
-    acceptTerms = true;
-    defaults.email = "${config.sops.secrets."admin/email".path}";
-    defaults.server = "https://acme-staging-v02.api.letsencrypt.org/directory";
+  options.optional.services.acme.enable = mkEnableOption "enable acme";
+  config = mkIf cfg.enable {
+    security.acme = {
+      acceptTerms = true;
+      defaults.email = "${email}";
+      defaults.server = "https://acme-staging-v02.api.letsencrypt.org/directory";
 
-    certs."${config.sops.secrets."admin/dev-domain".path}" = {
-      group = config.services.caddy.group;
+      certs = {
+        "${dev-domain}" = {
+          group = config.services.caddy.group;
 
-      domain = "${config.sops.secrets."admin/dev-domain".path}";
-      extraDomainNames = [ "*.${config.sops.secrets."admin/dev-domain".path}" ];
-      dnsProvider = "cloudflare";
-      dnsResolver = "1.1.1.1:53";
-      dnsPropagationCheck = true;
-      environmentFile = "${pkgs.writeText} "cloudflare-creds" ''
-        CLOUDFLARE_DNS_API_TOKEN=${config.sops.secrets."admin/cloudflare-api"}
-      ''}";     
+          domain = "*.${dev-domain}";
+          dnsProvider = "cloudflare";
+          dnsResolver = "1.1.1.1:53";
+          dnsPropagationCheck = true;
+          environmentFile = config.sops.secrets."admin/cloudflare-api".path;     
+        };
+      };
     };
   };
 }

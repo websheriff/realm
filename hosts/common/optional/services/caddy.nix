@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ config, lib, pkgs, ... }:
 with lib; let
   cfg = config.optional.services.caddy;
 in {
@@ -7,5 +7,6 @@ in {
 
     services.caddy = {
       enable = true;
+    };
   };
 }

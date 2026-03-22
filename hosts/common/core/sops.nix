@@ -12,6 +12,9 @@
     #Common
     secrets."admin/email" = {};
     secrets."admin/base-domain" = {};
+    secrets."admin/dev-domain" = {};
+    secrets."admin/prod-domain" = {};
+    secrets."admin/cloudflare-api" = {};
 
     #Users
     secrets."users/websheriff/password" = {};
