@@ -21,7 +21,7 @@ Services are deployed mainly in Nix with `autoDeployCharts` and some kubernetes 
 | Services | Role | Status |
 |----------|------|--------|
 | `Traefik` | Ingress | Active |
-| `MetalLB` | Load balancer | Active |
+| [MetalLB](https://metallb.io) | Load balancer | Active |
 | `Cert-Manager` | SSL certs with Lets Encrypt | Active |
 | `Forgejo` | Git | Active |
 | `ArgoCD` | GitOps | Inactive |
