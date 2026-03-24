@@ -6,7 +6,7 @@
       kind: Certificate
       metadata:
         name: prod-wildcard
-        namespace: traefik
+        namespace: kube-system
       spec:
         secretName: prod-wildcard-tls
         dnsNames:

@@ -27,5 +27,8 @@
     secrets."forgejo/dev/domain" = {};
     secrets."forgejo/dev/known-host" = {};
     secrets."forgejo/dev/access-token" = {};
+
+    #cert-manager
+    secrets."cert-manager/cloudflare-apiToken" = {};
   };
 }

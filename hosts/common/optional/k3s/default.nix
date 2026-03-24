@@ -1,6 +1,7 @@
 { ... }: {
   imports = [
     ./kube-system
-    ./flux-system
+    ./metallb-system
+    ./cert-manager
   ];
 }
