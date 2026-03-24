@@ -1,9 +1,7 @@
-<div align="center">
 # NixOS Configuration
-**Declarative and reproducible infrastructure.
-Made possible with:**
+Declarative and reproducible infrastructure.Made possible with:
 NixOS, SOPS, K3s, Helm, NetBird
-</div>
+
 ## Directory Layout
 
 ## Hosts
