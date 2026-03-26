@@ -166,6 +166,7 @@ in
     6443 #k3s
   # 2379 #k3s etcd clients
   # 2380 #k3s etcd peers
+    443
   ];
   networking.firewall.allowedUDPPorts = [
   ];
@@ -187,7 +188,6 @@ in
       "--write-kubeconfig-mode \"0644\""
       "--disable servicelb"
       "--disable local-storage"
-      "--disable coredns"
       "--disable metrics-server"
       # "--debug"
     ];

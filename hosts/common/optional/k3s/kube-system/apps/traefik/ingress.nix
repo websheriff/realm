@@ -2,7 +2,7 @@
 
   sops.templates."traefik-ingress-dashboard.yaml" = {
     content = ''
-      apiVersion: networking.k8s.io/va
+      apiVersion: networking.k8s.io/v1
       kind : Ingress
       metadata:
         name: traefik-dashboard

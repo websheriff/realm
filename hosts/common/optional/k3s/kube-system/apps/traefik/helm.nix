@@ -11,7 +11,7 @@
     spec = {
       valuesContent = ''
         globalArguments:
-          - "--global.sendanoymoususage=false"
+          - "--global.sendanonymoususage=false"
           
         deployment:
           replicas: 3
@@ -24,14 +24,14 @@
                   labelSelector:
                     matchLabels:
                       app.kubernetes.io/name: traefik
-                    topologyKey: kubernetes.io/hostname
+                  topologyKey: kubernetes.io/hostname
         service:
           enabled: true
           type: LoadBalancer
           externalTrafficPolicy: Local
           
         ports:
-          web
+          web:
             port: 8000
             expose:
               default: true

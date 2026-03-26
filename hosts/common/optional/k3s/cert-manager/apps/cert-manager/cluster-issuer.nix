@@ -9,11 +9,11 @@
       spec:
         acme:
           email: "${config.sops.placeholder."admin/email"}"
-          server: https://acme-staging-v02.api.letsencrypt.org/directory
+          server: https://acme-v02.api.letsencrypt.org/directory
           privateKeySecretRef:
             name: letsencrypt
           solvers:
-            - dns01
+            - dns01:
                 cloudflare:
                   email: "${config.sops.placeholder."admin/email"}"
                   apiTokenSecretRef:
