@@ -30,7 +30,7 @@
         };
       };
       spec = {
-        address = [ "10.5.100.145-10.5.100.150" ];
+        addresses = [ "10.5.100.145-10.5.100.150" ];
         autoAssign = false;
         avoidBuggyIPs = true;
       };

@@ -1,6 +1,6 @@
 { ... }: {
 
   imports = [
-    ./apps/longhorn
+    ./apps/cnpg
   ];
 }

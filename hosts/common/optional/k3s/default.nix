@@ -3,5 +3,6 @@
     ./kube-system
     ./metallb-system
     ./cert-manager
+    ./storage
   ];
 }
