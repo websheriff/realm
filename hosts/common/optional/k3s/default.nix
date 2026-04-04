@@ -4,5 +4,6 @@
     ./metallb-system
     ./cert-manager
     ./storage
+    ./cnpg-system
   ];
 }
