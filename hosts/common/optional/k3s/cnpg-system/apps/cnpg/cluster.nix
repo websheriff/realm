@@ -14,24 +14,24 @@
         };
       };
     }
-  {
-    apiVersion = "monitoring.coreos.com/v1";
-    kind = "PodMonitor";
-    metadata = {
-      name = "cnpg-cluster-metrics";
-    };
-    spec = {
-      selector = {
-        matchLabels = {
-          "cnpg.io/cluster" = "cnpg-cluster-metrics";
-        };
-        podMetricsEndpoints = [
-          {
-            port = "metrics";  
-          }
-        ];
+    {
+      apiVersion = "monitoring.coreos.com/v1";
+      kind = "PodMonitor";
+      metadata = {
+        name = "cnpg-cluster-metrics";
       };
-    };
-  }
+      spec = {
+        selector = {
+          matchLabels = {
+            "cnpg.io/cluster" = "cnpg-cluster-metrics";
+          };
+          podMetricsEndpoints = [
+            {
+              port = "metrics";  
+            }
+          ];
+        };
+      };
+    }
   ];
 }
