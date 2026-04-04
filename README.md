@@ -20,12 +20,13 @@ Services are deployed mainly in Nix with `autoDeployCharts` and some kubernetes 
 
 | Services | Role | Status |
 |----------|------|--------|
-| `Traefik` | Ingress | Active |
+| [Traefik](https://traefik.io) | Ingress | Active |
 | [MetalLB](https://metallb.io) | Load balancer | Active |
-| `Cert-Manager` | SSL certs with Lets Encrypt | Active |
-| `Forgejo` | Git | Active |
-| `ArgoCD` | GitOps | Inactive |
-| `Authentik` | Authentication | Inactive |
+| [Cert-Manager](https://cert-manager.io) | SSL certs with Lets Encrypt | Active |
+| [CloudNativePG](https://cloudnative-pg.io) | PostgreSQL Kubernetes operator | Active |
+| [Forgejo](https://forgejo.org) | Git | Active |
+| [ArgoCD](https://argo-cd.readthedocs.io/en/stable/) | GitOps | Inactive |
+| [Authentik](https://goauthentik.io) | Authentication | Inactive |
 | `Grafana` | Metrics | Inactive |
 | `Vaultwarden` | Password manager | Inactive |
 | `Karakeep` | Bookmark manager | Inactive |
