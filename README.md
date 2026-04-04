@@ -2,7 +2,7 @@
 Declarative and reproducible infrastructure.Made possible with:
 NixOS, SOPS, K3s, Helm, NetBird
 
-** Work in Progress **
+**Work in Progress**
 
 ## Directory Layout
 
