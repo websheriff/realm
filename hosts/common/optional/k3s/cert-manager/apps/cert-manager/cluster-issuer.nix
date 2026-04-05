@@ -8,14 +8,14 @@
         name: letsencrypt-prod
       spec:
         acme:
-          email: "${config.sops.placeholder."admin/email"}"
+          email: "${config.sops.placeholder."admin/emails/admin"}"
           server: https://acme-v02.api.letsencrypt.org/directory
           privateKeySecretRef:
             name: letsencrypt
           solvers:
             - dns01:
                 cloudflare:
-                  email: "${config.sops.placeholder."admin/email"}"
+                  email: "${config.sops.placeholder."admin/emails/admin"}"
                   apiTokenSecretRef:
                     name: cloudflare-api-token
                     key: apiToken

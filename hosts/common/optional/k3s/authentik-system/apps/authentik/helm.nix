@@ -1,6 +1,6 @@
 { config, ... }: {
 
-  sops.templates."authentik/authentik.yaml" = {
+  sops.templates."authentik/authentik-helm.yaml" = {
     content = ''
       apiVersion: helm.cattle.io/v1
       kind: HelmChart
@@ -15,29 +15,61 @@
         createNamespace: true
         valuesContent: |
           authentik:
-            secret_key:
+            global:
+              env:
+                - name: AUTHENTIK_POSTGRESQL__HOST
+                  valueFrom:
+                    secretKeyRef:
+                      name: authentik-db-secrets
+                      key: host
+                - name: AUTHENTIK_POSTGRESQL__USER
+                  valueFrom:
+                    secretKeyRef:
+                      name: authentik-db-secrets
+                      key: user
+                - name: AUTHENTIK_POSTGRESQL__PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: authentik-db-secrets
+                      key: password
+                - name: AUTHENTIK_SECRET_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: authentik-secrets
+                      key: secret-key
+                - name: AUTHENTIK_EMAIL__USERNAME
+                  valueFrom:
+                    secretKeyRef:
+                      name: authentik-email-secrets
+                      key: username
+                - name: AUTHENTIK_EMAIL__PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: authentik-email-secrets
+                      key: password
 
             postgresql:
-              host:
-              user:
-              password:
+              name: authentik
 
             email:
-              hosts: "smtp.fastmail.com"
-              port: 587
-              username: ""
-              password: ""
-              use_tls: true
-              use_ssl: false
+              host: "smtp.fastmail.com"
+              port: 465
+              use_tls: false
+              use_ssl: true
               timeout: 30
-              from: ""
+              from: "${config.sops.placeholder."admin/emails/noreply"}"
 
           server:
             ingress:
               ingressClassName: traefik
               enabled: true
               hosts:
-                -
-    ''
+                - ${config.sops.placeholder."authentik/domain"}
+    '';
+
+    path = "/var/lib/rancher/k3s/server/manifests/authentik-helm.yaml";
+    owner = "root";
+    group = "root";
+    mode = "0644";
   };
 }

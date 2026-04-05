@@ -10,7 +10,9 @@
     };
 
     #Common
-    secrets."admin/email" = {};
+    secrets."admin/emails/admin" = {};
+    secrets."admin/emails/noreply" = {};
+    secrets."admin/emails/alerts" = {};
     secrets."admin/base-domain" = {};
     secrets."admin/dev-domain" = {};
     secrets."admin/prod-domain" = {};
@@ -20,9 +22,15 @@
     secrets."users/websheriff/password" = {};
     secrets."users/websheriff/email" = {};
 
-    #FluxCD
-    secrets."fluxcd/ssh-key" = {};
-
+    #Authentik
+    secrets."authentik/secret-key" = {};
+    secrets."authentik/domain" = {};
+    secrets."authentik/database/host" = {};
+    secrets."authentik/database/user" = {};
+    secrets."authentik/database/password" = {};
+    secrets."authentik/email/user" = {};
+    secrets."authentik/email/password" = {};
+    
     #Forgejo
     secrets."forgejo/dev/domain" = {};
     secrets."forgejo/dev/known-host" = {};

@@ -9,7 +9,7 @@
         namespace: cert-manager
       type: Opaque
       stringData:
-        email: "${config.sops.placeholder."admin/email"}"
+        email: "${config.sops.placeholder."admin/emails/admin"}"
         apiToken: "${config.sops.placeholder."cert-manager/cloudflare-apiToken"}"
     '';
 

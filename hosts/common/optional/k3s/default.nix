@@ -5,5 +5,6 @@
     ./cert-manager
     ./storage
     ./cnpg-system
+    ./authentik-system
   ];
 }

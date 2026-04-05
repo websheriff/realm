@@ -28,7 +28,7 @@ Services are deployed mainly in Nix with `autoDeployCharts` and some kubernetes 
 | [CloudNativePG](https://cloudnative-pg.io) | PostgreSQL Kubernetes operator | Active |
 | [Forgejo](https://forgejo.org) | Git | Active |
 | [ArgoCD](https://argo-cd.readthedocs.io/en/stable/) | GitOps | Inactive |
-| [Authentik](https://goauthentik.io) | Authentication | Inactive |
+| [Authentik](https://goauthentik.io) | Authentication | WIP |
 | `Grafana` | Metrics | Inactive |
 | `Vaultwarden` | Password manager | Inactive |
 | `Karakeep` | Bookmark manager | Inactive |
