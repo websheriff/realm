@@ -45,17 +45,6 @@ in
 
   time.timeZone = "America/Chicago";
 
-  #sops.secrets."users/websheriff/password".neededForUsers = true;
-  #users.mutableUsers = false;
-
-#  users.users.websheriff = {
-#      isNormalUser = true;
-#      extraGroups = [ "wheel" ];
-#      hashedPasswordFile = config.sops.secrets.websheriff-password.path;
-#      packages = with pkgs; [];
-#    };
-#  users.groups.websheriff = {};
-
   environment.systemPackages = with pkgs; [
     age
     sops

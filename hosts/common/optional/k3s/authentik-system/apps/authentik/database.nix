@@ -13,9 +13,9 @@
         bootstrap:
           initdb:
             database: authentik
-            owner: authentik
+            owner: ${config.sops.placeholder."authentik/database/user"}
             secret:
-              name: authentik-db-secrets
+              name: authentik-db-auth
 
         managed:
           services:
