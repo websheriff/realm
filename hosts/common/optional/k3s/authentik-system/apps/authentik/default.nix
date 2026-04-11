@@ -3,9 +3,8 @@
   imports = [
     ./helm.nix
     ./database.nix
-    ./db-secrets.nix
+    ./service.nix
+    ./ingress.nix
     ./db-auth.nix
-    ./secret.nix
-    ./email-secrets.nix
   ];
 }

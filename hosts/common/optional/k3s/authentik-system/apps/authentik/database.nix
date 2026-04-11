@@ -6,7 +6,7 @@
       kind: Cluster
       metadata:
         name: authentik-db
-        namespace: authentik-system
+        namespace: authentik
       spec:
         instances: 1
 
@@ -22,7 +22,11 @@
             disabledDefaultServices: [ "ro", "r" ]
 
         storage:
-          size: 1Gi
+          storageClass: local-path
+          size: 3Gi
+        walStorage:
+          storageClass: local-path
+          size: 3Gi
     '';
 
     path = "/var/lib/rancher/k3s/server/manifests/authentik-database.yaml";

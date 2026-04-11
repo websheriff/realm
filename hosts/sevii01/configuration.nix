@@ -1,19 +1,4 @@
-{ config, lib, pkgs, inputs, ... }:
-let
-  custom-kubernetes-helm = with pkgs; wrapHelm kubernetes-helm {
-    plugins = with pkgs.kubernetes-helmPlugins; [
-      helm-diff
-      helm-secrets
-      helm-s3
-      helm-git
-    ];
-  };
-
-  custom-helmfile = pkgs.helmfile-wrapped.override {
-    inherit (custom-kubernetes-helm) pluginsDir;
-  };
-in
-{
+{ config, lib, pkgs, inputs, ... }: {
   
   imports =
     [];
@@ -58,8 +43,6 @@ in
     ghostty
     k3s
     nfs-utils
-    custom-kubernetes-helm
-    custom-helmfile
     yazi
     just
     wget
@@ -81,35 +64,21 @@ in
       "20-vlan5" = {
         netdevConfig = {
           Kind = "vlan";
-          Name = "vlan5";
+          Name = "eno1.5";
         };
         vlanConfig.Id = 5;
       };
-      "20-vlan30" = {
+      "30-vlan50" = {
         netdevConfig = {
           Kind = "vlan";
-          Name = "vlan30";
-        };
-        vlanConfig.Id = 30;
-      };
-      "20-vlan40" = {
-        netdevConfig = {
-          Kind = "vlan";
-          Name = "vlan40";
-        };
-        vlanConfig.Id = 40;
-      };
-      "20-vlan50" = {
-        netdevConfig = {
-          Kind = "vlan";
-          Name = "vlan50";
+          Name = "eno1.50";
         };
         vlanConfig.Id = 50;
       };
-      "20-vlan100" = {
+      "40-vlan100" = {
         netdevConfig = {
           Kind = "vlan";
-          Name = "vlan100";
+          Name = "eno1.100";
         };
         vlanConfig.Id = 100;
       };
@@ -119,45 +88,56 @@ in
       "10-eno1" = {
         enable = true;
         matchConfig.Name = "eno1";
-        address = [ "10.5.5.10/24" ];
-        gateway = [ "10.5.5.1" ];
-        dns = [ "10.5.5.1" ];
         vlan = [
-          "vlan50"
-          "vlan100"
+          "eno1.5"
+          "eno1.50"
+          "eno1.100"
         ];
         networkConfig.LinkLocalAddressing = "no";
+        linkConfig.RequiredForOnline = "no";
+      };
+      "20-vlan5" = {
+        matchConfig.Name = "eno1.5";
+        networkConfig = {
+          Address = "10.5.5.10/24";
+          Gateway = "10.5.5.1";
+          DNS = [ "10.5.5.1" ];
+        };
         linkConfig.RequiredForOnline = "routable";
       };
-      "30-vlan30" = {
-        matchConfig.Name = "vlan30";
-        linkConfig.RequiredForOnline = "no";
-      };
-      "30-vlan40" = {
-        matchConfig.Name = "vlan40";
-        linkConfig.RequiredForOnline = "no";
-      };
       "30-vlan50" = {
-        matchConfig.Name = "vlan50";
+        matchConfig.Name = "eno1.50";
+        networkConfig = {
+          Address = "10.5.50.2/32";
+          Gateway = "10.5.50.1";
+        };
         networkConfig.LinkLocalAddressing = "no";
         linkConfig.RequiredForOnline = "no";
       };
-      "30-vlan100" = {
-        matchConfig.Name = "vlan100";
+      "40-vlan100" = {
+        matchConfig.Name = "eno1.100";
+        networkConfig = {
+          Address = "10.5.100.2/32";
+          Gateway = "10.5.100.1";
+        };
+        networkConfig.LinkLocalAddressing = "no";
         linkConfig.RequiredForOnline = "no";
       };
     };
   };
 
   networking.nftables.enable = true;
-
+networking.firewall.enable = false;
   networking.firewall.allowedTCPPorts = [ 
     6443 #k3s
   # 2379 #k3s etcd clients
   # 2380 #k3s etcd peers
+    80
     443
+    179
   ];
   networking.firewall.allowedUDPPorts = [
+    8472
   ];
 
   services.xserver.videoDrivers = [ "i915" ];
@@ -176,7 +156,6 @@ in
     extraFlags = toString [
       "--write-kubeconfig-mode \"0644\""
       "--disable servicelb"
-      "--disable local-storage"
       "--disable metrics-server"
       # "--debug"
     ];

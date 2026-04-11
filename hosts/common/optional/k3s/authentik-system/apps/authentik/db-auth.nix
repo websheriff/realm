@@ -6,7 +6,7 @@
       kind: Secret
       metadata:
         name: authentik-db-auth
-        namespace: authentik-system
+        namespace: authentik
       stringData:
         username: "${config.sops.placeholder."authentik/database/user"}"
         password: "${config.sops.placeholder."authentik/database/password"}"

@@ -11,45 +11,18 @@
         repo: https://charts.goauthentik.io
         chart: authentik
         version: "2026.2.1"
-        targetNamespace: authentik-system
+        targetNamespace: authentik
         createNamespace: true
         valuesContent: |
+        
           authentik:
-            global:
-              env:
-                - name: AUTHENTIK_POSTGRESQL__HOST
-                  valueFrom:
-                    secretKeyRef:
-                      name: authentik-db-secrets
-                      key: host
-                - name: AUTHENTIK_POSTGRESQL__USER
-                  valueFrom:
-                    secretKeyRef:
-                      name: authentik-db-secrets
-                      key: user
-                - name: AUTHENTIK_POSTGRESQL__PASSWORD
-                  valueFrom:
-                    secretKeyRef:
-                      name: authentik-db-secrets
-                      key: password
-                - name: AUTHENTIK_SECRET_KEY
-                  valueFrom:
-                    secretKeyRef:
-                      name: authentik-secrets
-                      key: secret-key
-                - name: AUTHENTIK_EMAIL__USERNAME
-                  valueFrom:
-                    secretKeyRef:
-                      name: authentik-email-secrets
-                      key: username
-                - name: AUTHENTIK_EMAIL__PASSWORD
-                  valueFrom:
-                    secretKeyRef:
-                      name: authentik-email-secrets
-                      key: password
-
+            secret_key: "${config.sops.placeholder."authentik/secret-key"}"
+              
             postgresql:
+              host: ${config.sops.placeholder."authentik/database/host"}
               name: authentik
+              user: ${config.sops.placeholder."authentik/database/user"}
+              password: ${config.sops.placeholder."authentik/database/password"}
 
             email:
               host: "smtp.fastmail.com"
@@ -60,8 +33,9 @@
               from: "${config.sops.placeholder."admin/emails/noreply"}"
 
           server:
+            podLabels:
+              app: authentik
             ingress:
-              ingressClassName: traefik
               enabled: true
               hosts:
                 - ${config.sops.placeholder."authentik/domain"}

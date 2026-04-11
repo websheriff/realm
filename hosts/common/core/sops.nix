@@ -9,7 +9,7 @@
       generateKey = true;
     };
 
-    #Common
+    #common
     secrets."admin/emails/admin" = {};
     secrets."admin/emails/noreply" = {};
     secrets."admin/emails/alerts" = {};
@@ -18,11 +18,14 @@
     secrets."admin/prod-domain" = {};
     secrets."admin/cloudflare-api" = {};
 
-    #Users
+    #hosts
+    secrets."hosts/sevii01/ip" = {};
+    
+    #users
     secrets."users/websheriff/password" = {};
     secrets."users/websheriff/email" = {};
 
-    #Authentik
+    #authentik
     secrets."authentik/secret-key" = {};
     secrets."authentik/domain" = {};
     secrets."authentik/database/host" = {};
@@ -31,7 +34,7 @@
     secrets."authentik/email/user" = {};
     secrets."authentik/email/password" = {};
     
-    #Forgejo
+    #forgejo
     secrets."forgejo/dev/domain" = {};
     secrets."forgejo/dev/known-host" = {};
     secrets."forgejo/dev/access-token" = {};
@@ -41,5 +44,13 @@
 
     #traefik
     secrets."traefik-dashboard/domain" = {};
+    secrets."traefik/ip" = {};
+
+    #metallb
+    secrets."metallb/asn" = {};
+
+    #opnsense
+    secrets."opnsense/asn" = {};
+    secrets."opnsense/ip" = {};
   };
 }

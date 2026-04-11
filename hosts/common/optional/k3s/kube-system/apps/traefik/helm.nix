@@ -10,21 +10,17 @@
     };
     spec = {
       valuesContent = ''
+        rbac:
+          enabled: true
+          namespaced: false
+
         globalArguments:
           - "--global.sendanonymoususage=false"
           
         deployment:
-          replicas: 3
+          enabled: true
+          replicas: 1
 
-        affinity:
-          podAntiAffinity:
-            preferredDuringSchedulingIgnoredDuringExecution:
-              - weight: 100
-                podAffinityTerm:
-                  labelSelector:
-                    matchLabels:
-                      app.kubernetes.io/name: traefik
-                  topologyKey: kubernetes.io/hostname
         service:
           enabled: true
           type: LoadBalancer
@@ -32,26 +28,29 @@
           
         ports:
           web:
-            port: 8000
-            expose:
-              default: true
-            exposedPort: 80
-            protocol: TCP
+            http:
+              redirections:
+                entryPoint:
+                  to: websecure
+                  scheme: https
+                  permanent: true
           websecure:
-            port: 8443
-            expose:
-              default: true
-            exposedPort: 443
-            protocol: TCP
+            http3:
+              enabled: true
+            advertisedPort: 4443
             tls:
               enabled: true
 
         providers:
           kubernetesIngress:
             enabled: true
-            ingressClass: traefik
-            kubernetesCRD:
-              allowCrossNamespace: true
+            allowExternalNameServices: true
+            publishedSerivce:
+              enabled: false
+          kubernetesCRD:
+            enabled: true
+            allowExternalNameServices: true
+            allowCrossNamespace: true
 
         ingressClass:
           enabled: true
@@ -68,8 +67,7 @@
 
         additionalArguments:
           - "--log.level=INFO"
-          - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
-          - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+          - "--serversTransport.insecureSkipVerify=true"
       '';
     };
   };

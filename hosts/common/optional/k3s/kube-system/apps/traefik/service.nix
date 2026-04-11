@@ -6,6 +6,9 @@
     metadata = {
       name = "traefik-dashboard";
       namespace = "kube-system";
+      annotations = {
+        "metallb.io/address-pool" = "internal-pool";
+      };
       labels = {
         "app.kubernetes.io/name" = "traefik-dashboard";
         "app.kubernetes.io/instance" = "traefik";
