@@ -5,7 +5,7 @@ Hostnames are based on a Pokemon theme. Following the below structure.
 ## Categories
 
 ### Regions - Servers
-`kanto`, `johto`, `hoenn`, `sinnoh`, `unova`, `kaloa`, `alola`, `galar`
+`kanto`, `johto`, `hoenn`, `sinnoh`, `unova`, `kalos`, `alola`, `galar`, `hisui`, `paldea`
 
 ### Sevii Islands - K3s Cluster
 
