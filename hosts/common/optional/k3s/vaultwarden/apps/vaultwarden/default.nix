@@ -7,5 +7,6 @@
     ./secret-db.nix
     ./secret-admin.nix
     ./secret-oidc.nix
+    ./ingress.nix
   ];
 }

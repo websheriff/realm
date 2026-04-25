@@ -8,59 +8,40 @@
         name: vaultwarden
         namespace: kube-system
       spec:
-        repo: https://guerzon.github.io/vaultwarden
+        repo: https://gissilabs.github.io/charts/
         chart: vaultwarden
-        version: "0.35.1"
+        version: "1.4.0"
         targetNamespace: vaultwarden
         createNamespace: true
-        vaulesContent: |
+        valuesContent: |
 
-          domain: "https://${config.sops.placeholder."vaultwarden/domain"}/"
+          vaultwarden:
+            domain: "https://${config.sops.placeholder."vaultwarden/domain"}"
+            allowSignups: false
 
-          adminToken:
-            existingSecret: vaultwarden-admin
-            existingSecretKey: admin-token
+            admin:
+              enabled: true
+              existingSecret: "vaultwarden-admin"
 
-          timeZone: "America/Chicago"
-
-          ingress:
-            enabled: true
-            class: "traefik"
-            hostname: ${config.sops.placeholder."vaultwarden/domain"}
-            nginxIngressAnnotations: false
-            path: "/"
-            pathType: Prefix
+            sso:
+              enabled: true
+              authority: ${config.sops.placeholder."vaultwarden/sso/auth-url"}
+              existingSecret: "vaultwarden-oidc"
 
           service:
+            type: LoadBalancer
             annotations:
               metallb.io/address-pool: internal-pool
 
           database:
             type: postgresql
-            existingSecret: vaultwarden-db
-            existingSecretKey: uri
+            existingSecret: "vaultwarden-db"
+            existingSecretKey: "uri"
 
-          storage:
-            data:
-              name: "vaultwarden-data"
-              size: "5Gi"
-              class: "local-path"
-              keepPvc: true
-            attachments:
-              name: "vaultwarden-files"
-              size: "5Gi"
-              class: "local-path"
-              keepPvc: true
-            
-          sso:
+          persistence:
             enabled: true
-            authority: ${config.sops.placeholder."vaultwarden/sso/auth-url"}
-            existingSecret: vaultwarden-oidc
-            clientId:
-              existingSecretKey: client-id
-            clientSecret:
-              existingSecretKey: client-secret
-            enforceSSO: true
+            size: "2Gi"
+            storageClass: "local-path"
     '';
 
     path = "/var/lib/rancher/k3s/server/manifests/vaultwarden-helm.yaml";

@@ -30,7 +30,7 @@ Services are deployed mainly in Nix with `autoDeployCharts` and some kubernetes 
 | [ArgoCD](https://argo-cd.readthedocs.io/en/stable/) | GitOps | Inactive |
 | [Authentik](https://goauthentik.io) | Authentication | Active |
 | `Grafana` | Metrics | Inactive |
-| `Vaultwarden` | Password manager | WIP |
+| [Vaultwarden](https://github.com/dani-garcia/vaultwarden) | Password manager | Active |
 | `Karakeep` | Bookmark manager | Inactive |
 | `Jellyfin` | Media steaming | Inactive |
 | `Seerr` | Media requests | Inactive |

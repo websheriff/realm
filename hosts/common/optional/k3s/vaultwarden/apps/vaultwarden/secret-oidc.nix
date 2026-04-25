@@ -9,8 +9,8 @@
         namespace: vaultwarden
       type: Opaque
       stringData:
-        client-id: "${config.sops.placeholder."vaultwarden/sso/client-id"}"
-        client-secret: "${config.sops.placeholder."vaultwarden/sso/client-secret"}"
+        sso-client-id: "${config.sops.placeholder."vaultwarden/sso/client-id"}"
+        sso-client-secret: "${config.sops.placeholder."vaultwarden/sso/client-secret"}"
     '';
 
     path = "/var/lib/rancher/k3s/server/manifests/vaultwarden-secret-oidc.yaml";
