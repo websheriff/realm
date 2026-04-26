@@ -6,5 +6,6 @@
     ./cnpg-system
     ./authentik-system
     ./vaultwarden
+    ./documentation
   ];
 }
