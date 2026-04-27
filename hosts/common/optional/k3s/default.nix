@@ -7,5 +7,6 @@
     ./authentik-system
     ./vaultwarden
     ./documentation
+    ./authentication
   ];
 }

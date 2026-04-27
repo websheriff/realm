@@ -13,6 +13,7 @@
     secrets."admin/emails/admin" = {};
     secrets."admin/emails/noreply" = {};
     secrets."admin/emails/alerts" = {};
+    secrets."admin/smtp/host" = {};
     secrets."admin/base-domain" = {};
     secrets."admin/dev-domain" = {};
     secrets."admin/prod-domain" = {};
@@ -42,6 +43,14 @@
     #cert-manager
     secrets."cert-manager/cloudflare-apiToken" = {};
 
+    #pocketid
+    secrets."pocketid/domain" = {};
+    secrets."pocketid/encryption-key" = {};
+    secrets."pocketid/smtp-pass" = {};
+    secrets."pocketid/database/host" = {};
+    secrets."pocketid/database/user" = {};
+    secrets."pocketid/database/password" = {};
+    
     #traefik
     secrets."traefik-dashboard/domain" = {};
     secrets."traefik/ip" = {};

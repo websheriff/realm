@@ -62,6 +62,10 @@
               secretName: prod-wildcard-tls
 
         experimental:
+          plugins:
+            traefik-oidc-auth:
+              moduleName: "github.com/sevensolutions/traefik-oidc-auth"
+              version: "v0.19.0"
           kubernetesGateway:
             enabled: false
 

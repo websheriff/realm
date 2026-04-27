@@ -1,6 +1,8 @@
 { ... }: {
 
-  imports = [];
+  imports = [
+    ./apps/pocketid
+  ];
 
   services.k3s.manifests.authentication-ns.content = {
     apiVersion = "v1";
