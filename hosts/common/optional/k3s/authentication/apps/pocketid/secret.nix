@@ -12,10 +12,10 @@
         ENCRYPTION_KEY: "${config.sops.placeholder."pocketid/encryption-key"}"
         DATABASE_CONNECTION_STRING: "postgresql:${config.sops.placeholder."pocketid/database/user"}:${config.sops.placeholder."pocketid/database/password"}@${config.sops.placeholder."pocketid/database/host"}:5432/pocketid"
 
-        SMTP_HOST: "${config.sops.placeholder."admin/smtp/host"}"
-        SMTP_USER: "${config.sops.placeholder."admin/noreply"}"
+        SMTP_HOST: "${config.sops.placeholder."admin/emails/smtp/host"}"
+        SMTP_USER: "${config.sops.placeholder."admin/emails/noreply"}"
         SMTP_PASSWORD: "${config.sops.placeholder."pocketid/smtp-pass"}"
-        SMTP_FROM: "${config.sops.placeholder."admin/noreply"}"
+        SMTP_FROM: "${config.sops.placeholder."admin/emails/noreply"}"
     '';
 
     path = "/var/lib/rancher/k3s/server/manifests/pocketid-secret.yaml";

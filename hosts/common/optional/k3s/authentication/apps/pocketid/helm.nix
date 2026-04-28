@@ -14,16 +14,19 @@
         targetNamespace: authentication
         createNamespace: false
         valuesContent: |
-
+          extraEnv:
+            - name: APP_URL
+              value: "https://${config.sops.placeholder."pocketid/domain"}"
+              
           host: "https://${config.sops.placeholder."pocketid/domain"}"
 
           timeZone: "America/Chicago"
-
+          
           config:
             ui:
               settings:
                 smtp:
-                  port: 587
+                  port: "587"
                   tls: "starttls"
 
                 email:
@@ -31,7 +34,12 @@
 
           service:
             type: LoadBalancer
-            annotations: "metallb.io/address-pool" = "exposed-pool";
+            annotations:
+              metallb.io/address-pool: exposed-pool
+
+          secret:
+            create: false
+            name: "pocketid-secret"
     '';
 
     path = "/var/lib/rancher/k3s/server/manifests/pocketid-helm.yaml";

@@ -8,5 +8,6 @@
     ./vaultwarden
     ./documentation
     ./authentication
+    ./netbird
   ];
 }

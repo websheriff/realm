@@ -14,7 +14,7 @@
         - match: Host(`${config.sops.placeholder."pocketid/domain"}`)
           kind: Rule
           services:
-          - name: pocket-id
+          - name: pocketid-pocket-id
             port: 1411
     '';
 
