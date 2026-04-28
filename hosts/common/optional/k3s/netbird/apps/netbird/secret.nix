@@ -1,6 +1,7 @@
 { config, ... }: {
 
   sops = {
+    secrets."netbird/domain" = {};
     secrets."netbird/setup-key" = {};
 
     templates = {

@@ -31,6 +31,6 @@ Services are deployed mainly in Nix with `autoDeployCharts` and some kubernetes 
 | [Authentik](https://goauthentik.io) | Authentication | Active |
 | `Grafana` | Metrics | Inactive |
 | [Vaultwarden](https://github.com/dani-garcia/vaultwarden) | Password manager | Active |
-| `Karakeep` | Bookmark manager | Inactive |
+| [Linkwarden](https://linkwarden.app) | Bookmark manager | Inactive |
 | `Jellyfin` | Media steaming | Inactive |
 | `Seerr` | Media requests | Inactive |

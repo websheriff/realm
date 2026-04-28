@@ -9,7 +9,8 @@
   networking.hostName = "kanto";
 
   time.timeZone = "America/Chicago";
-sops.secrets."users/websheriff/password".neededForUsers = true;
+
+  sops.secrets."users/websheriff/password".neededForUsers = true;
   users.users.websheriff = {
       isNormalUser = true;
       extraGroups = [ "wheel" "minecraft" ];
@@ -17,7 +18,8 @@ sops.secrets."users/websheriff/password".neededForUsers = true;
 #        tree
 #	      neovim
       ];
-    };
+  };
+    
 nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
     age
@@ -146,6 +148,17 @@ nixpkgs.config.allowUnfree = true;
   services.newt = {
     enable = true;
     environmentFile = config.age.secrets.secret-newtMC.path;
+  };
+  services.netbird.clients.wt0 = {
+    login = {
+      enabled = true;
+      setupKeyFile = config.sops.secrets."kanto/netbird/setup-key".path;
+    };
+
+    port = 51821;
+    ui.enable = false;
+    openFirewall = true;
+    openInternalFirewall = true;
   };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];

@@ -13,7 +13,7 @@
     secrets."admin/emails/admin" = {};
     secrets."admin/emails/noreply" = {};
     secrets."admin/emails/alerts" = {};
-    secrets."admin/smtp/host" = {};
+    secrets."admin/emails/smtp/host" = {};
     secrets."admin/base-domain" = {};
     secrets."admin/dev-domain" = {};
     secrets."admin/prod-domain" = {};

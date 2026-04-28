@@ -1,4 +1,4 @@
-{ ... }: {
+{ config, ... }: {
 
   sops.templates."netbird/deploy" = {
     content = ''
@@ -28,6 +28,8 @@
                       secretKeyRef:
                         name: netbird
                         key: setup-key
+                  - name: NB_MANAGEMENT_URL
+                    value: "https://${config.sops.placeholder."netbird/domain"}"
                   - name: NB_HOSTNAME
                     value: "netbird-k3s-router"
                   - name: NB_LOG_LEVEL
