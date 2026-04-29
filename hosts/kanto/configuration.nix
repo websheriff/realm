@@ -151,8 +151,8 @@ nixpkgs.config.allowUnfree = true;
   };
   services.netbird.clients.wt0 = {
     login = {
-      enabled = true;
-      setupKeyFile = config.sops.secrets."kanto/netbird/setup-key".path;
+      enable = true;
+      setupKeyFile = config.sops.secrets."hosts/kanto/netbird/setup-key".path;
     };
 
     port = 51821;
@@ -160,6 +160,7 @@ nixpkgs.config.allowUnfree = true;
     openFirewall = true;
     openInternalFirewall = true;
   };
+  services.netbird.useRoutingFeatures = "both";
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   system.stateVersion = "25.11";

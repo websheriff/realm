@@ -21,7 +21,8 @@
 
     #hosts
     secrets."hosts/sevii01/ip" = {};
-    
+    secrets."hosts/kanto/netbird/setup-key" = {};
+        
     #users
     secrets."users/websheriff/password" = {};
     secrets."users/websheriff/email" = {};
