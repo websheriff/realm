@@ -26,6 +26,7 @@
             sso:
               enabled: true
               authority: ${config.sops.placeholder."vaultwarden/sso/auth-url"}
+              scopes: "email profile groups offline_access"
               existingSecret: "vaultwarden-oidc"
 
           service:

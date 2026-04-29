@@ -4,7 +4,6 @@
     ./metallb-system
     ./cert-manager
     ./cnpg-system
-    ./authentik-system
     ./vaultwarden
     ./documentation
     ./authentication

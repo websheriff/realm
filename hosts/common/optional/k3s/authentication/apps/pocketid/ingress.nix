@@ -15,7 +15,7 @@
           kind: Rule
           services:
           - name: pocketid-pocket-id
-            port: 1411
+            port: 80
     '';
 
     path = "/var/lib/rancher/k3s/server/manifests/pocketid-ingress.yaml";

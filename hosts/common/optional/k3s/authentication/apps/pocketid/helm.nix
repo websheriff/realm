@@ -14,11 +14,7 @@
         targetNamespace: authentication
         createNamespace: false
         valuesContent: |
-          extraEnv:
-            - name: APP_URL
-              value: "https://${config.sops.placeholder."pocketid/domain"}"
-              
-          host: "https://${config.sops.placeholder."pocketid/domain"}"
+          host: "${config.sops.placeholder."pocketid/domain"}"
 
           timeZone: "America/Chicago"
           
