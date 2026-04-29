@@ -30,8 +30,8 @@
                   - name: DATABASE_URL
                     valueFrom:
                       secretKeyRef:
-                        name: linkwarden-db
-                        key: uri
+                        name: linkwarden
+                        key: db-uri
                         optional: false
                   - name: NEXTAUTH_SECRET
                     valueFrom:
@@ -40,7 +40,23 @@
                         key: nextauth-secret
                         optional: false
                   - name: NEXTAUTH_URL
-                    value: https://${config.sops.placeholder."linkwarden/domain"}/api/v1/auth
+                    value: "https://${config.sops.placeholder."linkwarden/domain"}/api/v1/auth"
+                  - name: NEXT_PUBLIC_KEYCLOAK_ENABLED
+                    value: "true"
+                  - name: KEYCLOAK_CUSTOM_NAME
+                    value: "Pocket ID"
+                  - name: KEYCLOAK_ISSUER
+                    value: "https://${config.sops.placeholder."pocketid/domain"}"
+                  - name: KEYCLOAK_CLIENT_ID
+                    valueFrom:
+                      secretKeyRef:
+                        name: linkwarden
+                        key: sso-client-id
+                  - name: KEYCLOAK_CLIENT_SECRET
+                    valueFrom:
+                      secretKeyRef:
+                        name: linkwarden
+                        key: sso-client-secret
                 ports:
                   - containerPort: 3000
                     protocol: TCP

@@ -62,13 +62,6 @@
     secrets."opnsense/asn" = {};
     secrets."opnsense/ip" = {};
 
-    #linkwarden
-    secrets."linkwarden/domain" = {};
-    secrets."linkwarden/nextauth-secret" = {};
-    secrets."linkwarden/database/host" = {};
-    secrets."linkwarden/database/user" = {};
-    secrets."linkwarden/database/password" = {};
-
     #vaultwarden
     secrets."vaultwarden/domain" = {};
     secrets."vaultwarden/admin-token" = {};
